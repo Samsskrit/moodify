@@ -49,12 +49,7 @@
             },
             onSubmit(e) {
                 const newPlaylist = {
-<<<<<<< HEAD
-                    imageLink: base64String,
-                    playlist: 'testing playlists new',
-=======
                     'img_base64': base64String
->>>>>>> 3476051b3ff7ab5cab1dcfa797fef4e4cde3f569
                 }
                 this.$emit('upload', newPlaylist)
 
