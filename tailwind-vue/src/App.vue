@@ -83,27 +83,44 @@ export default {
       Form,
       Playlists
   },
+  mounted() {
+    console.log("Starting connection to WebSocket Server")
+    this.connection = new WebSocket('ws://localhost:3001')
+
+    this.connection.onmessage = function(event) {
+      console.log("message for: " + this.playlists[this.playlists.length - 1])
+      console.log(event.data)
+    }
+
+    this.connection.onopen = function(event) {
+      console.log(event)
+      console.log("Connection established");
+    }
+
+    this.connection.onerror = function(event) {
+      console.log(event)
+      console.log("Connection error");
+    }
+  },
   methods: {
       async addNewPlaylist(playlist) {
-          const ws = new WebSocket("ws://localhost:3001");
-          
-          ws.send(JSON.stringify(playlist))
+          this.connection.send(JSON.stringify(playlist))
+          this.playlists.push(playlist)
 
-          const res = await fetch('http://localhost:5000/playlists', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(playlist),
-          })
-          const data = await res.json()
-          this.playlists = [...this.playlists, data]
+//          const res = await fetch('http://localhost:5000/playlists', {
+//              method: 'POST',
+//              headers: {
+//                  'Content-Type': 'application/json',
+//              },
+//              body: JSON.stringify(playlist),
+//          })
+//          const data = await res.json()
       },
       async fetchPlaylists() {
-          const res = await fetch('http://localhost:5000/playlists');
+          // const res = await fetch('http://localhost:5000/playlists');
 
-          const data = await res.json();
-          return data;
+          // const data = await res.json();
+          // return data;
       }
   },
   async created() {

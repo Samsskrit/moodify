@@ -2,6 +2,8 @@ import torch
 from PIL import Image
 from torchvision import transforms
 import numpy as np
+import io
+import base64
 # import pandas as pd
 # from ast import literal_eval
 # import argparse
@@ -37,12 +39,14 @@ class DetectEmotion():
         model.eval()
         return model
 
-    def load_image(self, img_path) -> Image:
-        img_path = img_path
-        img = Image.open(img_path)
+    def load_image(self, img_b64) -> Image:
+        img_data = base64.b64decode(img_b64)
+        img_stream = io.BytesIO(img_data)
+        img = Image.open(img_stream)
         img = transforms.ToTensor()(img)
         img = img.unsqueeze(0)
         img = img.to(self.device)
+        img_stream.close()
         return img
 
     def detect_emotion(self, img, model) -> str:
@@ -52,9 +56,15 @@ class DetectEmotion():
         emotion = np.argmax(output)
         return self.emotions[emotion]
 
-    def get_genre_by_emotion(self, emotion) -> list:
-        genre_names = []
+    def get_genre_by_emotion(self, base64) -> list:
+        model = self.load_model()
+        img = self.load_image(base64)
+        emotion = self.detect_emotion(img, model)
+        
+        genre_emotion_list = []
         for genre in GenreId.items():
-            if genre[1]["emotion"] == emotion:
-                genre_names.append(genre[1]["name"])
-        return genre_names
+            if emotion in genre[1]["emotion"]:
+                genre_emotion_list.append(genre[1]["name"])
+        genre_emotion_list.append(emotion)
+        return genre_emotion_list
+

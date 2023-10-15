@@ -1,40 +1,63 @@
-import asyncio
-import json
-from serial.tools import list_ports
-from websockets.server import serve, WebSocketServerProtocol
+import firebase_admin
+from firebase_admin import db, credentials, auth
 from detect_emotion import DetectEmotion
 
-def status_code():
-    return {
-        "status": "success",
-        "code": 200
-    }
+DetectEmotion = DetectEmotion()
+cred = credentials.Certificate("C:\\Users\\samue\\Documents\\GitHub\\moodify\\firebase.config.js")
+firebase_admin.initialize_app(cred)
+db = firebase_admin.db()
 
-def create_message():
-    return {
+base64_ref = db.reference("images/")
+mood_list_ref = db.reference("moods/")
 
-    }
+def auth():
+    try:
+        auth.sign_in_anonymous()
+        return True
+    except auth.AuthError as e:
+        error_code = e.code
+        error_message = e.message
+        print("Error code: {0}".format(error_code))
+        print("Error message: {0}".format(error_message))
+        return False
 
-def create_init_message():
-    return {
-        **create_message()
-    }
+async def write_moods_to_firebase(user_id):
+    result = await auth()
 
-def read_messsage(message):
-    json.loads(message)
+    if not result:
+        return
 
-async def handler(websocket: WebSocketServerProtocol):
-    await websocket.send(json.dumps(create_init_message()))
+    base64_str, size = await read_base64_from_firebase(user_id)
+    genre_mood_list = DetectEmotion.get_genre_by_emotion(base64_str)
+    mood = genre_mood_list[-1]
+    genre_list = genre_mood_list[:-1]
 
-    async for message in websocket:
-        read_messsage(message)
-        await websocket.send("Message received!")
+    # size of moods_branch will always be size
+    moods_branch = mood_list_ref.get()
+    moods_branch.set({
+        "mood_{}".format(size): {
+            "genres": genre_list,
+            "mood": mood,
+        }
+    })
 
-async def main():
-    print("Starting websocket server...")
-    async with serve(handler, 'localhost', 3001):
-        print("Websocket server running on port 3001\n")
 
-        await asyncio.Future()  # run forever
+async def read_base64_from_firebase(user_id):
+    result = await auth()
 
-asyncio.run(main())
+    if not result:
+        return
+
+    base64_branch = base64_ref.get()
+    size = len(base64_branch)
+
+    base64_str = base64_ref.order_by_key().limit_to_last(1).get()
+    # event_listener = base64_ref.listen(update_list)
+    return base64_str, size
+
+def update_list(event):
+    base64_data = event.data
+    if base64_data:
+        genre_list = DetectEmotion.get_genre_by_emotion(base64_data)
+        print(genre_list)
+        mood_list_ref.set(genre_list)

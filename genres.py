@@ -1,46 +1,48 @@
 from artemis import emotions
 
+# ['amusement', 'awe', 'contentment', 'excitement', 'anger', 'disgust',  'fear', 'sadness', 'something else']
+
 emotions = emotions.ARTEMIS_EMOTIONS
 GenreId = {
     0: {
         "name": "acoustic",
-        "emotion": "excitement"
+        "emotion": "excitement sadness"
     },
     1: {
         "name": "afrobeat",
-        "emotion": "excitement"
+        "emotion": "excitement awe"
     },
     2: {
         "name": "alt-rock",
-        "emotion": "anger"
+        "emotion": "anger something else awe"
     },
     3: {
         "name": "alternative",
-        "emotion": "something else"
+        "emotion": "something else awe sadness"
     },
     4: {
         "name": "ambient",
-        "emotion": "awe"
+        "emotion": "awe sadness"
     },
     5: {
         "name": "anime",
-        "emotion": "contentment"
+        "emotion": "contentment excitement"
     },
     6: {
         "name": "black-metal",
-        "emotion": "anger"
+        "emotion": "fear anger disgust"
     },
     7: {
         "name": "bluegrass",
-        "emotion": "sadness"
+        "emotion": "sadness disgust"
     },
     8: {
         "name": "blues",
-        "emotion": "sadness"
+        "emotion": "sadness anger"
     },
     9: {
         "name": "bossanova",
-        "emotion": "amusement"
+        "emotion": "amusement awe"
     },
     10: {
         "name": "brazil",
@@ -52,27 +54,27 @@ GenreId = {
     },
     12: {
         "name": "british",
-        "emotion": "something else"
+        "emotion": "something else fear disgust"
     },
     13: {
         "name": "cantopop",
-        "emotion": "amusement"
+        "emotion": "amusement awe contentment"
     },
     14: {
         "name": "chicago-house",
-        "emotion": "excitement"
+        "emotion": "excitement awe"
     },
     15: {
         "name": "children",
-        "emotion": "amusement"
+        "emotion": "amusement excitement"
     },
     16: {
         "name": "chill",
-        "emotion": "awe"
+        "emotion": "awe contentment"
     },
     17: {
         "name": "classical",
-        "emotion": "awe"
+        "emotion": "awe sadness"
     },
     18: {
         "name": "club",
@@ -112,11 +114,11 @@ GenreId = {
     },
     27: {
         "name": "disney",
-        "emotion": "amusement"
+        "emotion": "amusement excitement"
     },
     28: {
         "name": "drum-and-bass",
-        "emotion": "contentment"
+        "emotion": "contentment anger"
     },
     29: {
         "name": "dub",
@@ -124,7 +126,7 @@ GenreId = {
     },
     30: {
         "name": "dubstep",
-        "emotion": "excitement"
+        "emotion": "excitement anger"
     },
     31: {
         "name": "edm",
@@ -136,11 +138,11 @@ GenreId = {
     },
     33: {
         "name": "electronic",
-        "emotion": "amusement"
+        "emotion": "amusement anger"
     },
     34: {
         "name": "emo",
-        "emotion": "sadness"
+        "emotion": "sadness anger disgust"
     },
     35: {
         "name": "folk",
@@ -152,7 +154,7 @@ GenreId = {
     },
     37: {
         "name": "french",
-        "emotion": "fear"
+        "emotion": "fear something else"
     },
     38: {
         "name": "funk",
@@ -160,19 +162,19 @@ GenreId = {
     },
     39: {
         "name": "garage",
-        "emotion": "excitement"
+        "emotion": "excitement amusement"
     },
     40: {
         "name": "german",
-        "emotion": "something else"
+        "emotion": "something else fear"
     },
     41: {
         "name": "gospel",
-        "emotion": "awe"
+        "emotion": "awe contentment"
     },
     42: {
         "name": "goth",
-        "emotion": "anger"
+        "emotion": "fear anger disgust"
     },
     43: {
         "name": "grindcore",
@@ -184,27 +186,27 @@ GenreId = {
     },
     45: {
         "name": "grunge",
-        "emotion": "anger"
+        "emotion": "anger disgust"
     },
     46: {
         "name": "guitar",
-        "emotion": "awe"
+        "emotion": "awe excitement"
     },
     47: {
         "name": "happy",
-        "emotion": "amusement"
+        "emotion": "amusement excitement"
     },
     48: {
         "name": "hard-rock",
-        "emotion": "anger"
+        "emotion": "anger disgust"
     },
     49: {
         "name": "hardcore",
-        "emotion": "anger"
+        "emotion": "anger disgust"
     },
     50: {
         "name": "hardstyle",
-        "emotion": "awe"
+        "emotion": "awe excitement"
     },
     51: {
         "name": "heavy-metal",
@@ -212,7 +214,7 @@ GenreId = {
     },
     52: {
         "name": "hip-hop",
-        "emotion": "contentment"
+        "emotion": "contentment excitement"
     },
     53: {
         "name": "holidays",
@@ -248,7 +250,7 @@ GenreId = {
     },
     61: {
         "name": "indie",
-        "emotion": "excitement"
+        "emotion": "excitement sadness amusement"
     },
     62: {
         "name": "indie-pop",
@@ -268,23 +270,23 @@ GenreId = {
     },
     66: {
         "name": "j-idol",
-        "emotion": "awe"
+        "emotion": "awe amusement"
     },
     67: {
         "name": "j-pop",
-        "emotion": "awe"
+        "emotion": "awe amusement"
     },
     68: {
         "name": "j-rock",
-        "emotion": "amusement"
+        "emotion": "amusement awe"
     },
     69: {
         "name": "jazz",
-        "emotion": "contentment"
+        "emotion": "contentment sadness"
     },
     70: {
         "name": "k-pop",
-        "emotion": "excitement"
+        "emotion": "excitement amusement contentment"
     },
     71: {
         "name": "kids",
@@ -308,7 +310,7 @@ GenreId = {
     },
     76: {
         "name": "metal",
-        "emotion": "anger"
+        "emotion": "anger disgust"
     },
     77: {
         "name": "metal-misc",
@@ -324,7 +326,7 @@ GenreId = {
     },
     80: {
         "name": "movies",
-        "emotion": "awe"
+        "emotion": "awe amusement"
     },
     81: {
         "name": "mpb",
@@ -356,7 +358,7 @@ GenreId = {
     },
     88: {
         "name": "piano",
-        "emotion": "excitement"
+        "emotion": "excitement sadness amusement contentment anger disgust fear"
     },
     89: {
         "name": "pop",
@@ -368,7 +370,7 @@ GenreId = {
     },
     91: {
         "name": "post-dubstep",
-        "emotion": "excitement"
+        "emotion": "excitement fear"
     },
     92: {
         "name": "power-pop",
@@ -384,7 +386,7 @@ GenreId = {
     },
     95: {
         "name": "punk",
-        "emotion": "anger"
+        "emotion": "anger fear"
     },
     96: {
         "name": "punk-rock",
@@ -424,7 +426,7 @@ GenreId = {
     },
     105: {
         "name": "romance",
-        "emotion": "contentment"
+        "emotion": "contentment something else"
     },
     106: {
         "name": "sad",
@@ -432,15 +434,15 @@ GenreId = {
     },
     107: {
         "name": "salsa",
-        "emotion": "salsa"
+        "emotion": "awe something else"
     },
     108: {
         "name": "samba",
-        "emotion": "salsa"
+        "emotion": "excitement something else"
     },
     109: {
         "name": "sertanejo",
-        "emotion": "salsa"
+        "emotion": "something else"
     },
     110: {
         "name": "show-tunes",
@@ -456,7 +458,7 @@ GenreId = {
     },
     113: {
         "name": "sleep",
-        "emotion": "contentment"
+        "emotion": "sadness"
     },
     114: {
         "name": "songwriter",

@@ -9,7 +9,6 @@
 <script>
 
     let base64String = '';
-    let blobString = '';
 
     export default {
         name: 'Form',
@@ -27,15 +26,16 @@
                 if (this.file) {
                     preview.src = URL.createObjectURL(this.file);
 
-                    // const reader = new FileReader();
-                    // reader.onload = function () {
-                    //     base64String = reader.result.replace("data:", "")
-                    //         .replace(/^.+,/, "");
-                    // };
-                    // reader.readAsDataURL(this.file);
+                    const reader = new FileReader();
+                    reader.onload = function () {
+                        base64String = reader.result.replace("data:", "")
+                            .replace(/^.+,/, "");
+                    };
+                    reader.readAsDataURL(this.file);
                 }
             },
             onSubmit(e) {
+                e.preventDefault()
                 const newPlaylist = {
                     'img_base64': base64String
                 }
