@@ -22,8 +22,11 @@
     <div class="w-full bg-light" style="height: 12vh;">
 
     </div>
-    <Header title="ww"/>
-    <Form />
+    <div>
+        <Header title="ww"/>
+        <Form @upload="addNewPlaylist"/>
+        <Playlists :playlists="playlists" />
+    </div>
   </div>
   
 </template>
@@ -31,19 +34,40 @@
 <script>
 import Header from './components/Header.vue'
 import Form from './components/UploadForm.vue'
+import Playlists from './components/Playlists.vue'
 export default {
   name: 'App',
-  /*data: function() {
-    return {
-      pages: [
-        {id: 'home', name: 'Home', icon:"home"},
-        {id: 'library', name: 'Your Library', icon:"library_music"},
-      ]
-    };
-  },*/
+  data() {
+      return {
+          playlists: []
+      }
+  }, 
   components: {
       Header,
-      Form
+      Form,
+      Playlists
   },
+  methods: {
+      async addNewPlaylist(playlist) {
+          const res = await fetch('http://localhost:5000/playlists', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(playlist),
+          })
+          const data = await res.json()
+          this.playlists = [...this.playlists, data]
+      },
+      async fetchPlaylists() {
+          const res = await fetch('http://localhost:5000/playlists');
+
+          const data = await res.json();
+          return data;
+      }
+  },
+  async created() {
+      this.playlists = await this.fetchPlaylists();
+  }
 }
 </script> 

@@ -37,7 +37,7 @@
             onSubmit(e) {
                 const newPlaylist = {
                     imageLink: base64String,
-                    playlist: '',
+                    playlist: 'testing bitch playlists new',
                 }
                 this.$emit('upload', newPlaylist)
 
