@@ -1,26 +1,47 @@
 <template>
     <form @submit="onSubmit()">
-        <input id="uploadImage" type="file" @change="displayImage()" required/>
+        <input id="uploadImage" type="file" ref="file" @change="handleFileUpload($event)" required/>
         <img id="preview" src="#" alt="uploaded image">
         <input type="submit" value="Upload Image"/>
     </form>
 </template>
 
 <script>
+
+    let base64String = '';
+    let blobString = '';
+
     export default {
         name: 'Form',
+        data() {
+            return {
+                imageLink: '',
+                playlist: '',
+            }
+        },
         methods: {
-            displayImage() {
-                console.log(uploadImage.files);
-                const [file] = uploadImage.files;
-                if (file) {
-                    preview.src = URL.createObjectURL(file);
+            handleFileUpload ($event) {
+                console.log(event.target.files[0])
+                this.file = event.target.files[0]
+
+                if (this.file) {
+                    preview.src = URL.createObjectURL(this.file);
+
+                    // const reader = new FileReader();
+                    // reader.onload = function () {
+                    //     base64String = reader.result.replace("data:", "")
+                    //         .replace(/^.+,/, "");
+                    // };
+                    // reader.readAsDataURL(this.file);
                 }
             },
             onSubmit(e) {
-                console.log("hiii");
-                e.preventDefault();
+                const newPlaylist = {
+                    'img_base64': base64String
+                }
+                this.$emit('upload', newPlaylist)
 
+                this.file = ''
             }
         }
     }
