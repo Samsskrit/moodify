@@ -1,7 +1,4 @@
 <template>
-    <header>
-        <h1>Moodify {{title}}</h1>
-    </header>
 </template>
 
 <script>

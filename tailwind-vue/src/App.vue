@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-dark h-screen">
+  <div class="bg-dark h-screen" id="wrapper">
     <div class = "flex" style="height: 88vh;">
       <!-- side navigation-->
       <div class = "w-60 bg-black h-full flex-none">
@@ -27,28 +27,39 @@
             </body>
           </button>
         </div>
-        <div class ="h-px w-full bg-light my-3"> </div>
+        <div class ="h-px w-full bg-light my-3"> </div> <br>
         <div class = "mx-5">  
             <h1 class ="text-xs text-lightest tracking-widest uppercase"> Playlists</h1> <br>
+
             <button type="file" class ="flex items-center justify-start">
               <img src="images/add.png" class ="h-8 w-8 mr-3" style="filter: brightness(0) invert(1);"/>
-              <body text="white" style="font-family:cursive;"  > 
-                <p style="font-size:large">Create Mood Mix </p>
+              <body text="white" style="font-family:cursive;">
+                <p style="font-size:large">
+                  <label for="upload-photo">Create Mood Mix</label>
+                </p>
               </body>
-            </button> 
-        </div>
+              <input type="file" name="photo" id="upload-photo" />
+            </button> <br> <br>
 
-        <div class ="h-px w-full bg-light my-3"> 
-          <form @submit="onSubmit()">
-            <input id="uploadImage" type="file" @change="displayImage()" required/>
-            <input type="submit" value="Upload Image"/>
-          </form>
+            <h1 class ="text-xs text-lightest tracking-widest uppercase"> Artists</h1> <br>
+            <body text="grey" style="font-family:cursive;">
+              <p>
+                  Michael Chian <br>
+                  Jim Huang <br>
+                  Rahul Iyer <br>
+                  Samuel Sukendro <br>
+              </p>
+            </body>
         </div>
-
       </div>
 
       <!-- main content-->
       <div class="w-full h-full relative">
+        <div>
+          <Header title="ww"/>
+          <Form @upload="addNewPlaylist"/>
+          <Playlists :playlists="playlists" />
+        </div>
         <!-- header -->
         <div class="w-full sticky top-0 p-2">
         </div>
@@ -56,12 +67,7 @@
     </div>
     <!--play bar-->
     <div class="w-full bg-light" style="height: 12vh;">
-
-    </div>
-    <div>
-        <Header title="ww"/>
-        <Form @upload="addNewPlaylist"/>
-        <Playlists :playlists="playlists" />
+    
     </div>
   </div>
   
@@ -104,3 +110,47 @@ export default {
   }
 }
 </script> 
+<style scoped>
+label {
+   cursor: pointer;
+   color: white;
+   /* Style as you please, it will become the visible UI component. */
+}
+
+#upload-photo {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+}
+
+
+
+@keyframes bgcolor {
+    0% {
+        background-color: #2982c2
+    }
+
+    30% {
+        background-color: #1DB954
+    }
+
+    60% {
+        background-color: #c1560e
+    }
+
+    90% {
+        background-color: rgb(158, 24, 46)
+    }
+
+    100% {
+        background-color: #6b29ad
+    }
+}
+
+#wrapper {
+    -webkit-animation: bgcolor 50s infinite;
+    animation: bgcolor 30s infinite;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+}
+</style>
