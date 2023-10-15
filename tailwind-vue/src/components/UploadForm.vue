@@ -2,7 +2,8 @@
     <form @submit="onSubmit()">
         <input id="uploadImage" type="file" ref="file" @change="handleFileUpload($event)" required/>
         <img id="preview" src="#" alt="uploaded image">
-        <input type="submit" value="Upload Image"/>
+        <!-- <input type="submit" value="Upload Image"/> -->
+        <button @click="onSubmit()">SUBMIT</button>
     </form>
 </template>
 
@@ -27,12 +28,12 @@
                 if (this.file) {
                     preview.src = URL.createObjectURL(this.file);
 
-                    // const reader = new FileReader();
-                    // reader.onload = function () {
-                    //     base64String = reader.result.replace("data:", "")
-                    //         .replace(/^.+,/, "");
-                    // };
-                    // reader.readAsDataURL(this.file);
+                    const reader = new FileReader();
+                    reader.onload = function () {
+                        base64String = reader.result.replace("data:", "")
+                            .replace(/^.+,/, "");
+                    };
+                    reader.readAsDataURL(this.file);
                 }
             },
             onSubmit(e) {

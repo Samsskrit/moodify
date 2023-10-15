@@ -71,6 +71,7 @@
 import Header from './components/Header.vue'
 import Form from './components/UploadForm.vue'
 import Playlists from './components/Playlists.vue'
+import { writeUserData, moodListener } from './actions.js'
 export default {
   name: 'App',
   data() {
@@ -85,25 +86,17 @@ export default {
   },
   methods: {
       async addNewPlaylist(playlist) {
-          const ws = new WebSocket("ws://localhost:3001");
-          
-          ws.send(JSON.stringify(playlist))
-
-          const res = await fetch('http://localhost:5000/playlists', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(playlist),
-          })
-          const data = await res.json()
-          this.playlists = [...this.playlists, data]
+        console.log(playlist)
+        alert('a')
+        // let writeToIndex = await readIndices();  
+        // await writeUserData(1, playlist);
+        moodListener(1)
       },
       async fetchPlaylists() {
-          const res = await fetch('http://localhost:5000/playlists');
+          // const res = await fetch('http://localhost:5000/playlists');
 
-          const data = await res.json();
-          return data;
+          // const data = await res.json();
+          // return data;
       }
   },
   async created() {
