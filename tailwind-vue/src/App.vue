@@ -90,30 +90,8 @@ export default {
       Form,
       Playlists
   },
-  mounted() {
-    console.log("Starting connection to WebSocket Server")
-    this.connection = new WebSocket('ws://localhost:3001')
-
-    this.connection.onmessage = function(event) {
-      console.log("message for: " + this.playlists[this.playlists.length - 1])
-      console.log(event.data)
-    }
-
-    this.connection.onopen = function(event) {
-      console.log(event)
-      console.log("Connection established");
-    }
-
-    this.connection.onerror = function(event) {
-      console.log(event)
-      console.log("Connection error");
-    }
-  },
   methods: {
       async addNewPlaylist(playlist) {
-          this.connection.send(JSON.stringify(playlist))
-          this.playlists.push(playlist)
-
 //          const res = await fetch('http://localhost:5000/playlists', {
 //              method: 'POST',
 //              headers: {

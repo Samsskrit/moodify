@@ -47,7 +47,6 @@
                 }
             },
             onSubmit(e) {
-                e.preventDefault()
                 const newPlaylist = {
                     'img_base64': base64String
                 }

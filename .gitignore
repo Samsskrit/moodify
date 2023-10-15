@@ -1,3 +1,5 @@
 **/*.config.js
 thing.py
 artemis_detect.py
+
+firebase.config.js
