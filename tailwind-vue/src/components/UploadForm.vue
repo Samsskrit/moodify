@@ -21,6 +21,7 @@
 <script>
 
     let base64String = '';
+    let blobString = '';
 
     export default {
         name: 'Form',
@@ -38,18 +39,22 @@
                 if (this.file) {
                     preview.src = URL.createObjectURL(this.file);
 
-                    const reader = new FileReader();
-                    reader.onload = function () {
-                        base64String = reader.result.replace("data:", "")
-                            .replace(/^.+,/, "");
-                    };
-                    reader.readAsDataURL(this.file);
+                    // const reader = new FileReader();
+                    // reader.onload = function () {
+                    //     base64String = reader.result.replace("data:", "")
+                    //         .replace(/^.+,/, "");
+                    // };
+                    // reader.readAsDataURL(this.file);
                 }
             },
             onSubmit(e) {
                 const newPlaylist = {
+<<<<<<< HEAD
                     imageLink: base64String,
                     playlist: 'testing playlists new',
+=======
+                    'img_base64': base64String
+>>>>>>> 3476051b3ff7ab5cab1dcfa797fef4e4cde3f569
                 }
                 this.$emit('upload', newPlaylist)
 

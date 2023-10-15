@@ -91,6 +91,10 @@ export default {
   },
   methods: {
       async addNewPlaylist(playlist) {
+          const ws = new WebSocket("ws://localhost:3001");
+          
+          ws.send(JSON.stringify(playlist))
+
           const res = await fetch('http://localhost:5000/playlists', {
               method: 'POST',
               headers: {
